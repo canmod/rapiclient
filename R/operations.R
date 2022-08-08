@@ -44,8 +44,8 @@ get_api <- function(url, config = NULL) {
       stop("'url' does not appear to be JSON or YAML")
 
   # swagger element is required
-  if (is.null(api$swagger)) {
-    warning("Missing Swagger Specification version")
+  if (is.null(api$swagger) & is.null(api$openapi)) {
+    warning("Missing openapi or Swagger Specification version")
   }
   # Info element is required
   if(is.null(api$info)) {
@@ -123,7 +123,7 @@ get_operation_definitions <- function(api, path = NULL) {
 
       # parameters can be defined on path level and overridden on operation
       # level
-      # 
+      #
       # Note that parameters is often a list() rather than NULL, so deal
       # that situation as well.
       if(is.null(operation$parameters) || length(operation$parameters)==0) {
