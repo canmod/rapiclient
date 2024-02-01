@@ -466,7 +466,13 @@ build_op_url <- function(api, scheme, host, base_path, op_def, par_values) {
     }
   }
   # build url
-  expandUrlArgs <- function(x) structure(do.call(c, lapply(x, function(z) as.list(z))), names=rep(names(x), sapply(x, length)))
+  expandUrlArgs <- function(x) {
+    if (is.null(x)) return(x) ## silence warning about passing NULL to structure
+    structure(
+        do.call(c, lapply(x, function(z) as.list(z)))
+      , names = rep(names(x), sapply(x, length))
+    )
+  }
   query <- expandUrlArgs(query)
   httr::modify_url(
     url =
