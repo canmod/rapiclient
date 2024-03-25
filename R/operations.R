@@ -234,6 +234,10 @@ get_operations <- function(api, .headers = NULL, path = NULL,
   operation_defs <- get_operation_definitions(api, path)
 
   param_values <- expression({
+    ## SW: more informative message given total connectivity failure
+    if (!curl::has_internet()) {
+      stop("API failure due to lack of internet connectivity.")
+    }
     if (length(formals()) > 0) {
       l1 <- as.list(mget(names(formals()), environment()))
       l1 <- l1[lapply(l1, mode) != "name"]

@@ -102,7 +102,11 @@ set_default_args <- function (f, ...) {
 #' @rdname default_arguments
 #' @export
 set_default_args_list <- function (f, arguments) {
+  ## SW: saving attributes necessary to be able to print out docs for
+  ##     each operation.
+  saved_attributes = attributes(f)
   formals(f)[names(arguments)] <- arguments
+  attributes(f) = saved_attributes
   f
 }
 
