@@ -1,25 +1,17 @@
-#library(testthat)
-
 context("External API test")
 
 test_that("Reads external API operations", {
 
-  # This test will skip when not in interactive mode
-  # It reads api description from remote location.
-  #
-  # To run this test, use:
-  #  devtools::test(filter = "*external*")
-
-  if(!interactive()) {
-    skip("Run only in interactive mode")
-  }
+  skip_on_cran()
 
   # parse api specification
-  ext_api <- get_api("http://api.opentrials.net/v1/swagger.yaml")
+  ext_api <- suppressWarnings({
+    get_api("https://clinicaltrials.gov/api/oas/v2", ext = "yaml")
+  })
 
   # operations and schemas
   operations <- get_operations(ext_api)
-  expect(length(operations) > 10, "Missing operations")
+  expect(length(operations) > 8, "Missing operations")
 
   expect(all(
     vapply(operations, function(x) inherits(x, "rapi_operation"), logical(1))

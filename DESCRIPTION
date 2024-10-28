@@ -1,10 +1,10 @@
 Package: rapiclient
 Type: Package
 Title: Dynamic OpenAPI/Swagger Client
-Version: 0.1.5
+Version: 0.1.8
 Authors@R: c(
   person("Darko", "Bergant", , "darko.bergant@gmail.com", "aut"),
-  person("Marcel", "Ramos", , "marcel.ramos@roswellpark.org", c("cre", "ctb"),
+  person("Marcel", "Ramos", , "marcel.ramos@sph.cuny.edu", c("cre", "ctb"),
     comment = c(ORCID = "0000-0002-3242-0582")
   ),
   person("Alexandru", "Mahmoud", , , "ctb"),
@@ -22,7 +22,8 @@ License: MIT + file LICENSE
 Imports:
   jsonlite,
   httr,
+  tools,
   yaml
 Encoding: UTF-8
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Suggests: testthat
